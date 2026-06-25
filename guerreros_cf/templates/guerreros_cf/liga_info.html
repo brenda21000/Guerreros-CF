@@ -1,0 +1,75 @@
+{% extends 'guerreros_cf/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="page-hero">
+  <h1>Quién Dirige la Liga</h1>
+  <p>Conoce la trayectoria detrás de Liga Guerreros Yauhquemehcan</p>
+</div>
+
+{% for persona in staff %}
+<div class="director-bio">
+
+  <div class="director-bio-header">
+    {% if persona.foto %}
+      <img src="{{ persona.foto.url }}" class="director-bio-foto">
+    {% else %}
+      <img src="{% static 'img/logo.png' %}" class="director-bio-foto">
+    {% endif %}
+
+    <div class="director-bio-titulo">
+      <h2>{{ persona.nombre }}</h2>
+      <span class="director-bio-cargo">{{ persona.get_cargo_display }}</span>
+
+      {% if persona.anios_experiencia %}
+      <span class="director-bio-experiencia">
+        ⭐ {{ persona.anios_experiencia }} años de experiencia
+      </span>
+      {% endif %}
+    </div>
+  </div>
+
+  {% if persona.bio %}
+  <div class="director-bio-texto">
+    <p>{{ persona.bio|linebreaks }}</p>
+  </div>
+  {% endif %}
+
+  <div class="director-bio-contacto">
+    {% if persona.whatsapp %}
+      <a href="https://wa.me/52{{ persona.whatsapp }}" target="_blank" rel="noopener" class="director-bio-cta">
+        💬 Escríbeme por WhatsApp
+      </a>
+    {% endif %}
+
+    {% if persona.telefono %}
+      <span class="director-bio-dato">📞 {{ persona.telefono }}</span>
+    {% endif %}
+
+    {% if persona.email %}
+      <span class="director-bio-dato">✉️ {{ persona.email }}</span>
+    {% endif %}
+  </div>
+
+  {% if persona.galeria.all %}
+  <div class="director-bio-galeria">
+    {% for foto in persona.galeria.all %}
+    <div class="director-bio-galeria-item">
+      <img src="{{ foto.imagen.url }}" alt="{{ foto.descripcion|default:persona.nombre }}">
+      {% if foto.descripcion %}
+        <span class="director-bio-galeria-caption">{{ foto.descripcion }}</span>
+      {% endif %}
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+</div>
+{% empty %}
+<div class="director-bio-vacio">
+  <p>Aún no se ha registrado la información del director de la liga.</p>
+</div>
+{% endfor %}
+
+{% endblock %}

@@ -1,0 +1,105 @@
+{% extends 'guerreros_cf/base.html' %} {% load static %} {% block content %}
+<div class="page-hero">
+  <h1>Contáctanos</h1>
+  <p>¿Quieres inscribirte o tienes alguna pregunta?</p>
+</div>
+
+<div class="section">
+  <div class="contact-grid">
+    <!-- FORMULARIO -->
+    <div class="contact-form-block">
+      <h3>Envíanos un Mensaje</h3>
+
+      <!-- MENSAJE DE ÉXITO -->
+      {% if messages %} {% for message in messages %}
+      <div class="alert-success">{{ message }}</div>
+      {% endfor %} {% endif %}
+
+      <form method="post" novalidate>
+        {% csrf_token %} {% for field in form %}
+        <div class="form-group">
+          <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+          {{ field }} {% if field.errors %}
+          <div class="field-error">{{ field.errors|join:", " }}</div>
+          {% endif %}
+        </div>
+        {% endfor %}
+
+        <button type="submit" class="btn-submit">Enviar Mensaje</button>
+      </form>
+    </div>
+
+    <!-- INFO -->
+    <div class="contact-info-block">
+      <div class="contact-card">
+        <div class="contact-card-icon">📍</div>
+        <div>
+          <div class="contact-card-title">Ubicación</div>
+          <div class="contact-card-val">
+            EMSAD Yauhquemehcan<br />Tlaxcala, México
+          </div>
+        </div>
+      </div>
+
+      <!-- WHATSAPP CON LINK -->
+      <div class="contact-card">
+        <div class="contact-card-icon">📱</div>
+        <div>
+          <div class="contact-card-title">WhatsApp</div>
+          <div class="contact-card-val">
+            <a
+              href="https://wa.me/522411055982"
+              target="_blank"
+              style="color: var(--gold); text-decoration: none"
+            >
+              241 105 5982
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-card">
+        <div class="contact-card-icon">🕐</div>
+        <div>
+          <div class="contact-card-title">Horario de Atención</div>
+          <div class="contact-card-val">
+            Sábados y Domingos<br />8:00 AM – 10:00 PM
+          </div>
+        </div>
+      </div>
+
+      <!-- CORREO CON LINK -->
+      <div class="contact-card">
+        <div class="contact-card-icon">📧</div>
+        <div>
+          <div class="contact-card-title">Correo</div>
+          <div class="contact-card-val">
+            <a
+              href="mailto:santitosmm92@gmail.com"
+              style="color: var(--gold); text-decoration: none"
+            >
+              santitosmm92@gmail.com
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-card">
+        <div class="contact-card-icon">🗺️</div>
+        <div>
+          <div class="contact-card-title">Mapa</div>
+          <div class="contact-card-val">
+            <a
+              href="https://www.google.com/maps/search/EMSAD+Yauhquemehcan/@19.410603,-98.184883,17z"
+              target="_blank"
+              style="color: var(--gold)"
+            >
+              Abrir en Google Maps →
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

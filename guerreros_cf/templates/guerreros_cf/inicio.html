@@ -1,0 +1,1205 @@
+{% extends 'guerreros_cf/base.html' %}
+{% load static %}
+ 
+{% block content %}
+ 
+<!-- HERO -->
+<div class="hero">
+ 
+  <div class="hero-slider">
+ 
+    {% for img in imagenes %}
+      <div class="slide {% if forloop.first %}active{% endif %}">
+        <img src="{% static 'img/'|add:img %}" class="slide-img">
+      </div>
+    {% empty %}
+      <div class="slide active">
+        <img src="{% static 'img/1.jpg' %}" class="slide-img">
+      </div>
+    {% endfor %}
+ 
+    <!-- BOTONES -->
+    <button class="slider-btn prev" onclick="prevSlide()">❮</button>
+    <button class="slider-btn next" onclick="nextSlide()">❯</button>
+ 
+  </div>
+ 
+  <!-- OVERLAY -->
+  <div class="hero-pattern"></div>
+ 
+  <!-- CONTENIDO -->
+  <div class="hero-content">
+ 
+    <div class="hero-badge">
+      Ven y sé parte de la liga
+    </div>
+ 
+    <h1>
+      Academia<br>
+      <em>Guerreros CF</em>
+    </h1>
+ 
+    <p>
+      Pasión por el fútbol. Fe, disciplina y trabajo en equipo.
+      Formando campeones dentro y fuera de la cancha.
+    </p>
+ 
+    <div class="hero-buttons">
+ 
+      <a href="{% url 'guerreros:noticias_lista' %}" class="hero-cta">
+        Ver Noticias →
+      </a>
+ 
+      <a href="{% url 'guerreros:liga_info' %}" class="hero-cta secondary">
+        Conocer la Liga
+      </a>
+ 
+    </div>
+ 
+  </div>
+ 
+</div>
+ 
+<!-- SOBRE LA LIGA -->
+<div class="section">
+ 
+  <div class="section-header">
+    <div class="section-tag">Liga</div>
+    <h2 class="section-title">Sobre Nuestra Liga</h2>
+    <div class="section-line"></div>
+  </div>
+ 
+  <p style="max-width:800px;margin:auto;text-align:center;line-height:1.8;">
+    La liga Guerreros CF nace con el propósito de fomentar el deporte,
+    la disciplina y el trabajo en equipo en jóvenes y adultos.
+    Desde su creación, ha sido un espacio donde los jugadores desarrollan
+    habilidades dentro y fuera de la cancha, promoviendo valores como el respeto,
+    la responsabilidad y la pasión por el fútbol.
+  </p>
+ 
+</div>
+ 
+<!-- FILOSOFÍA -->
+<div class="section">
+ 
+  <div class="section-header">
+    <div class="section-tag">Identidad</div>
+    <h2 class="section-title">Nuestra Filosofía</h2>
+    <div class="section-line"></div>
+  </div>
+ 
+  <p style="max-width:700px;margin:auto;text-align:center;line-height:1.8;margin-bottom:40px;">
+    En Guerreros CF creemos en la formación integral de nuestros jugadores,
+    fortaleciendo disciplina, compromiso, respeto y pasión por el fútbol.
+  </p>
+ 
+  <!-- SLIDER FILOSOFÍA -->
+  <div class="filosofia-slider">
+ 
+    {% for img in imagenes_filo %}
+      <div class="filo-slide {% if forloop.first %}active{% endif %}">
+        <img src="{% static 'img/'|add:img %}" class="filo-img">
+      </div>
+    {% endfor %}
+ 
+    <button class="filo-btn filo-prev" onclick="prevFilo()">❮</button>
+    <button class="filo-btn filo-next" onclick="nextFilo()">❯</button>
+ 
+  </div>
+ 
+</div>
+ 
+<!-- EQUIPOS DE ENTRENAMIENTO -->
+<div class="section">
+ 
+  <div class="section-header">
+    <div class="section-tag">Equipos</div>
+    <h2 class="section-title">Estos son Nuestros Equipos de Entrenamiento</h2>
+    <div class="section-line"></div>
+  </div>
+ 
+  <p style="max-width:700px;margin:auto;text-align:center;line-height:1.8;margin-bottom:40px;">
+    Conoce a los equipos que entrenan día a día para representar a Guerreros CF
+    con disciplina, esfuerzo y pasión por el fútbol.
+  </p>
+ 
+  <!-- SLIDER EQUIPOS DE ENTRENAMIENTO -->
+  <div class="entreno-slider">
+ 
+    {% for img in imagenes_entreno %}
+      <div class="entreno-slide {% if forloop.first %}active{% endif %}">
+        <img src="{% static 'img/'|add:img %}" class="entreno-img">
+      </div>
+    {% endfor %}
+ 
+    <button class="entreno-btn entreno-prev" onclick="prevEntreno()">❮</button>
+    <button class="entreno-btn entreno-next" onclick="nextEntreno()">❯</button>
+ 
+  </div>
+ 
+</div>
+ 
+<!-- UBICACIÓN -->
+<div class="section">
+ 
+  <div class="section-header">
+    <div class="section-tag">Ubicación</div>
+    <h2 class="section-title">Dónde Entrenamos</h2>
+    <div class="section-line"></div>
+  </div>
+ 
+  <div class="location-block">
+ 
+    <div class="location-info">
+ 
+      <h3>📍 Deportivo</h3>
+ 
+      <div class="location-item">
+ 
+        <div class="location-icon">📌</div>
+ 
+        <div class="location-text">
+          <strong>Ubicación</strong>
+          <span>San Dionicio Yauhquemehcan, Tlaxcala, México</span>
+        </div>
+ 
+      </div>
+ 
+      <div class="location-item">
+ 
+        <div class="location-icon">⚽</div>
+ 
+        <div class="location-text">
+          <strong>Actividad</strong>
+          <span>Entrenamientos y partidos oficiales</span>
+        </div>
+ 
+      </div>
+ 
+    </div>
+ 
+    <div class="location-map">
+ 
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d299.81158315379497!2d-98.18508733813046!3d19.410846646099113!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d021002effc3dd%3A0xf9b78425fd3061a0!2sDeportivo%20san%20Dionicio%20yahuquemehcan!5e0!3m2!1ses!2sus!4v1778026322260!5m2!1ses!2sus"
+        loading="lazy"
+        style="width:100%; height:100%; border:0;">
+      </iframe>
+ 
+    </div>
+ 
+  </div>
+ 
+</div>
+ 
+<!-- GALERÍA -->
+<div class="section">
+ 
+  <div class="section-header">
+    <div class="section-tag">Galería</div>
+    <h2 class="section-title">Momentos Guerreros</h2>
+    <div class="section-line"></div>
+  </div>
+ 
+  <p style="
+     max-width:850px;
+     margin:auto;
+     text-align:center;
+     line-height:1.9;
+     margin-bottom:45px;
+  ">
+    Revive los mejores momentos de nuestros jugadores y jugadoras
+    representando con orgullo a Guerreros CF.
+  </p>
+ 
+  <!-- SLIDER EVENTO -->
+  <div class="evento-slider">
+ 
+    <!-- FOTO 1 -->
+    <div class="evento-slide active">
+      <img src="{% static 'img/702746554_1355835926601376_8113447337976028623_n.jpg' %}" class="evento-img">
+ 
+      <div class="evento-overlay">
+        <span class="evento-badge">Evento Estatal</span>
+ 
+        <h3>
+          Guerreros CF representando a Tlaxcala
+        </h3>
+ 
+        <p>
+          Participación destacada durante actividades oficiales de fútbol 7 y turismo deportivo.
+        </p>
+      </div>
+    </div>
+ 
+    <!-- FOTO 2 -->
+    <div class="evento-slide">
+      <img src="{% static 'img/703563839_1355828289935473_3570666899111641537_n.jpg' %}" class="evento-img">
+ 
+      <div class="evento-overlay">
+        <span class="evento-badge">Reconocimiento</span>
+ 
+        <h3>
+          Compromiso y crecimiento deportivo
+        </h3>
+ 
+        <p>
+          Jugadores y entrenadores convivieron con representantes deportivos del estado.
+        </p>
+      </div>
+    </div>
+ 
+    <!-- FOTO 3 -->
+    <div class="evento-slide">
+      <img src="{% static 'img/703613269_1355208483330787_7105598412297472614_n.jpg' %}" class="evento-img">
+ 
+      <div class="evento-overlay">
+        <span class="evento-badge">Talento</span>
+ 
+        <h3>
+          Pasión dentro y fuera de la cancha
+        </h3>
+ 
+        <p>
+          Guerreros CF continúa formando jugadores con disciplina y carácter.
+        </p>
+      </div>
+    </div>
+ 
+    <!-- FOTO 4 -->
+    <div class="evento-slide">
+      <img src="{% static 'img/703796708_1355492889969013_7375387308390099430_n.jpg' %}" class="evento-img">
+ 
+      <div class="evento-overlay">
+        <span class="evento-badge">Fútbol 7</span>
+ 
+        <h3>
+          Experiencias que inspiran
+        </h3>
+ 
+        <p>
+          Cada evento fortalece el crecimiento competitivo de nuestros equipos.
+        </p>
+      </div>
+    </div>
+ 
+    <!-- FOTO 5 -->
+    <div class="evento-slide">
+      <img src="{% static 'img/703897070_1355835999934702_2647654473857459479_n.jpg' %}" class="evento-img">
+ 
+      <div class="evento-overlay">
+        <span class="evento-badge">Guerreros CF</span>
+ 
+        <h3>
+          Formación integral
+        </h3>
+ 
+        <p>
+          Construyendo sueños, disciplina y pasión por el fútbol.
+        </p>
+      </div>
+    </div>
+ 
+    <!-- FOTO 6 -->
+    <div class="evento-slide">
+      <img src="{% static 'img/703914305_1355826639935638_6239319106441624263_n.jpg' %}" class="evento-img">
+ 
+      <div class="evento-overlay">
+        <span class="evento-badge">Competencia</span>
+ 
+        <h3>
+          Orgullo tlaxcalteca
+        </h3>
+ 
+        <p>
+          Guerreros CF sigue creciendo como academia referente en el estado.
+        </p>
+      </div>
+    </div>
+ 
+    <!-- FOTO 7 -->
+    <div class="evento-slide">
+      <img src="{% static 'img/704187771_1355192099999092_2033963523694565895_n.jpg' %}" class="evento-img">
+ 
+      <div class="evento-overlay">
+        <span class="evento-badge">Disciplina</span>
+ 
+        <h3>
+          Compromiso con el deporte
+        </h3>
+ 
+        <p>
+          El esfuerzo constante impulsa el desarrollo de cada jugador.
+        </p>
+      </div>
+    </div>
+ 
+    <!-- FOTO 8 -->
+    <div class="evento-slide">
+      <img src="{% static 'img/705326910_1355208533330782_5202624262096417442_n.jpg' %}" class="evento-img">
+ 
+      <div class="evento-overlay">
+        <span class="evento-badge">Reconocimiento</span>
+ 
+        <h3>
+          Representando con orgullo a Tlaxcala
+        </h3>
+ 
+        <p>
+          Nuestros equipos continúan destacando en competencias y eventos estatales.
+        </p>
+      </div>
+    </div>
+ 
+    <!-- FOTO 9 -->
+    <div class="evento-slide">
+      <img src="{% static 'img/705373893_1355826673268968_1702010243379318645_n.jpg' %}" class="evento-img">
+ 
+      <div class="evento-overlay">
+        <span class="evento-badge">Guerreros CF</span>
+ 
+        <h3>
+          Una academia con visión y futuro
+        </h3>
+ 
+        <p>
+          Seguimos formando campeones dentro y fuera de la cancha.
+        </p>
+      </div>
+    </div>
+ 
+    <!-- FOTO 10 -->
+    <div class="evento-slide">
+      <img src="{% static 'img/705682193_1355826649935637_5121327816970791358_n.jpg' %}" class="evento-img">
+ 
+      <div class="evento-overlay">
+        <span class="evento-badge">Equipo</span>
+ 
+        <h3>
+          Unidos por el fútbol
+        </h3>
+ 
+        <p>
+          La unidad del equipo es nuestra mayor fortaleza en cada partido.
+        </p>
+      </div>
+    </div>
+ 
+    <!-- FOTO 11 -->
+    <div class="evento-slide">
+      <img src="{% static 'img/705729291_1355826683268967_806212183241283327_n.jpg' %}" class="evento-img">
+ 
+      <div class="evento-overlay">
+        <span class="evento-badge">Partido</span>
+ 
+        <h3>
+          Intensidad y entrega total
+        </h3>
+ 
+        <p>
+          Cada partido es una oportunidad para crecer y demostrar el trabajo del equipo.
+        </p>
+      </div>
+    </div>
+ 
+    <!-- FOTO 12 -->
+    <div class="evento-slide">
+      <img src="{% static 'img/705729397_1355763089941993_8221255686626872587_n.jpg' %}" class="evento-img">
+ 
+      <div class="evento-overlay">
+        <span class="evento-badge">Cancha</span>
+ 
+        <h3>
+          Pasión en cada jugada
+        </h3>
+ 
+        <p>
+          Los Guerreros CF dan todo en cada entrenamiento y competencia.
+        </p>
+      </div>
+    </div>
+ 
+    <!-- FOTO 13 -->
+    <div class="evento-slide">
+      <img src="{% static 'img/706833384_1355821896602779_1982506084958293218_n.jpg' %}" class="evento-img">
+ 
+      <div class="evento-overlay">
+        <span class="evento-badge">Juventud</span>
+ 
+        <h3>
+          El futuro del fútbol tlaxcalteca
+        </h3>
+ 
+        <p>
+          Jóvenes talentos que representan la nueva generación de Guerreros CF.
+        </p>
+      </div>
+    </div>
+ 
+    <!-- FOTO 14 -->
+    <div class="evento-slide">
+      <img src="{% static 'img/707378315_1357056453145990_8240587692205455897_n.jpg' %}" class="evento-img">
+ 
+      <div class="evento-overlay">
+        <span class="evento-badge">Guerreros CF</span>
+ 
+        <h3>
+          Historia que se escribe con esfuerzo
+        </h3>
+ 
+        <p>
+          Cada momento en la cancha construye la historia de nuestra academia.
+        </p>
+      </div>
+    </div>
+ 
+    <!-- FOTO 15 -->
+    <div class="evento-slide">
+      <img src="{% static 'img/707394388_1355821949936107_583595212646445381_n.jpg' %}" class="evento-img">
+ 
+      <div class="evento-overlay">
+        <span class="evento-badge">Femenil</span>
+ 
+        <h3>
+          Las guerreras del fútbol
+        </h3>
+ 
+        <p>
+          El equipo femenil de Guerreros CF destaca con talento y determinación.
+        </p>
+      </div>
+    </div>
+ 
+    <!-- FOTO 16 -->
+    <div class="evento-slide">
+      <img src="{% static 'img/707816140_1357048886480080_9658495399272881_n.jpg' %}" class="evento-img">
+ 
+      <div class="evento-overlay">
+        <span class="evento-badge">Competencia</span>
+ 
+        <h3>
+          Listos para el reto
+        </h3>
+ 
+        <p>
+          La preparación constante nos hace más fuertes en cada competencia.
+        </p>
+      </div>
+    </div>
+ 
+    <!-- FOTO 17 -->
+    <div class="evento-slide">
+      <img src="{% static 'img/WhatsApp Image 2026-05-26 at 9.06.02 PM.jpeg' %}" class="evento-img">
+ 
+      <div class="evento-overlay">
+        <span class="evento-badge">Entrenamiento</span>
+ 
+        <h3>
+          Trabajo y dedicación
+        </h3>
+ 
+        <p>
+          Cada sesión de entrenamiento nos acerca más a la excelencia deportiva.
+        </p>
+      </div>
+    </div>
+ 
+    <!-- FOTO 18 -->
+    <div class="evento-slide">
+      <img src="{% static 'img/WhatsApp Image 2026-05-26 at 9.06.03 PM (1).jpeg' %}" class="evento-img">
+ 
+      <div class="evento-overlay">
+        <span class="evento-badge">Academia</span>
+ 
+        <h3>
+          Formando líderes del deporte
+        </h3>
+ 
+        <p>
+          Más que jugadores, formamos personas con valores y disciplina.
+        </p>
+      </div>
+    </div>
+ 
+    <!-- FOTO 19 -->
+    <div class="evento-slide">
+      <img src="{% static 'img/WhatsApp Image 2026-05-26 at 9.06.03 PM (2).jpeg' %}" class="evento-img">
+ 
+      <div class="evento-overlay">
+        <span class="evento-badge">Orgullo</span>
+ 
+        <h3>
+          El escudo que nos une
+        </h3>
+ 
+        <p>
+          Portamos el escudo de Guerreros CF con orgullo y responsabilidad.
+        </p>
+      </div>
+    </div>
+ 
+    <!-- FOTO 20 -->
+    <div class="evento-slide">
+      <img src="{% static 'img/WhatsApp Image 2026-05-26 at 9.06.03 PM (3).jpeg' %}" class="evento-img">
+ 
+      <div class="evento-overlay">
+        <span class="evento-badge">Guerreros CF</span>
+ 
+        <h3>
+          Juntos somos invencibles
+        </h3>
+ 
+        <p>
+          La unión del equipo es la clave del éxito en cada torneo.
+        </p>
+      </div>
+    </div>
+ 
+    <!-- FOTO 21 -->
+    <div class="evento-slide">
+      <img src="{% static 'img/WhatsApp Image 2026-05-26 at 9.06.03 PM (4).jpeg' %}" class="evento-img">
+ 
+      <div class="evento-overlay">
+        <span class="evento-badge">Varonil</span>
+ 
+        <h3>
+          Potencia y velocidad
+        </h3>
+ 
+        <p>
+          El equipo varonil demuestra su calidad en cada encuentro oficial.
+        </p>
+      </div>
+    </div>
+ 
+    <!-- FOTO 22 -->
+    <div class="evento-slide">
+      <img src="{% static 'img/WhatsApp Image 2026-05-26 at 9.06.03 PM.jpeg' %}" class="evento-img">
+ 
+      <div class="evento-overlay">
+        <span class="evento-badge">Torneos</span>
+ 
+        <h3>
+          Representando con honor
+        </h3>
+ 
+        <p>
+          Guerreros CF participa en torneos locales y estatales con gran nivel.
+        </p>
+      </div>
+    </div>
+ 
+    <!-- FOTO 23 -->
+    <div class="evento-slide">
+      <img src="{% static 'img/WhatsApp Image 2026-05-26 at 9.16.12 PM (1).jpeg' %}" class="evento-img">
+ 
+      <div class="evento-overlay">
+        <span class="evento-badge">Convivencia</span>
+ 
+        <h3>
+          Más que un equipo, una familia
+        </h3>
+ 
+        <p>
+          La camaradería y el compañerismo son pilares de nuestra academia.
+        </p>
+      </div>
+    </div>
+ 
+    <!-- FOTO 24 -->
+    <div class="evento-slide">
+      <img src="{% static 'img/WhatsApp Image 2026-05-26 at 9.16.12 PM (2).jpeg' %}" class="evento-img">
+ 
+      <div class="evento-overlay">
+        <span class="evento-badge">Fútbol 7</span>
+ 
+        <h3>
+          Estrategia y trabajo colectivo
+        </h3>
+ 
+        <p>
+          El fútbol 7 exige coordinación y táctica que nuestros jugadores dominan.
+        </p>
+      </div>
+    </div>
+ 
+    <!-- FOTO 25 -->
+    <div class="evento-slide">
+      <img src="{% static 'img/WhatsApp Image 2026-05-26 at 9.16.12 PM (3).jpeg' %}" class="evento-img">
+ 
+      <div class="evento-overlay">
+        <span class="evento-badge">Gol</span>
+ 
+        <h3>
+          Celebrando cada logro
+        </h3>
+ 
+        <p>
+          Cada gol y cada victoria es el resultado del trabajo en equipo.
+        </p>
+      </div>
+    </div>
+ 
+    <!-- FOTO 26 -->
+    <div class="evento-slide">
+      <img src="{% static 'img/WhatsApp Image 2026-05-26 at 9.16.12 PM.jpeg' %}" class="evento-img">
+ 
+      <div class="evento-overlay">
+        <span class="evento-badge">Pasión</span>
+ 
+        <h3>
+          El fútbol es nuestra pasión
+        </h3>
+ 
+        <p>
+          Vivimos el fútbol con intensidad, dedicación y amor por el deporte.
+        </p>
+      </div>
+    </div>
+ 
+    <!-- FOTO 27 -->
+    <div class="evento-slide">
+      <img src="{% static 'img/WhatsApp Image 2026-05-26 at 9.16.13 PM (1).jpeg' %}" class="evento-img">
+ 
+      <div class="evento-overlay">
+        <span class="evento-badge">Guerreros CF</span>
+ 
+        <h3>
+          Siempre adelante
+        </h3>
+ 
+        <p>
+          Con esfuerzo y determinación, Guerreros CF sigue creciendo cada día.
+        </p>
+      </div>
+    </div>
+ 
+    <!-- FOTO 28 -->
+    <div class="evento-slide">
+      <img src="{% static 'img/WhatsApp Image 2026-05-26 at 9.16.13 PM (2).jpeg' %}" class="evento-img">
+ 
+      <div class="evento-overlay">
+        <span class="evento-badge">Evento</span>
+ 
+        <h3>
+          Momentos que quedan para siempre
+        </h3>
+ 
+        <p>
+          Los eventos deportivos crean recuerdos y experiencias únicas para todos.
+        </p>
+      </div>
+    </div>
+ 
+    <!-- FOTO 29 -->
+    <div class="evento-slide">
+      <img src="{% static 'img/WhatsApp Image 2026-05-26 at 9.16.13 PM (3).jpeg' %}" class="evento-img">
+ 
+      <div class="evento-overlay">
+        <span class="evento-badge">Deportivo</span>
+ 
+        <h3>
+          San Dionicio, nuestra casa
+        </h3>
+ 
+        <p>
+          El Deportivo San Dionicio es el escenario donde nacen los sueños guerreros.
+        </p>
+      </div>
+    </div>
+ 
+    <!-- FOTO 30 -->
+    <div class="evento-slide">
+      <img src="{% static 'img/WhatsApp Image 2026-05-26 at 9.16.13 PM (4).jpeg' %}" class="evento-img">
+ 
+      <div class="evento-overlay">
+        <span class="evento-badge">Juvenil</span>
+ 
+        <h3>
+          Los jóvenes guerreros
+        </h3>
+ 
+        <p>
+          La categoría juvenil es el semillero del futuro de la academia.
+        </p>
+      </div>
+    </div>
+ 
+    <!-- FOTO 31 -->
+    <div class="evento-slide">
+      <img src="{% static 'img/WhatsApp Image 2026-05-26 at 9.16.13 PM (5).jpeg' %}" class="evento-img">
+ 
+      <div class="evento-overlay">
+        <span class="evento-badge">Entrenadores</span>
+ 
+        <h3>
+          Guiados por los mejores
+        </h3>
+ 
+        <p>
+          Nuestros entrenadores forman a los jugadores con experiencia y vocación.
+        </p>
+      </div>
+    </div>
+ 
+    <!-- FOTO 32 -->
+    <div class="evento-slide">
+      <img src="{% static 'img/WhatsApp Image 2026-05-26 at 9.16.13 PM.jpeg' %}" class="evento-img">
+ 
+      <div class="evento-overlay">
+        <span class="evento-badge">Victoria</span>
+ 
+        <h3>
+          El sabor del triunfo
+        </h3>
+ 
+        <p>
+          Cada victoria es el reflejo del trabajo duro y la unión del equipo.
+        </p>
+      </div>
+    </div>
+ 
+    <!-- FOTO 33 -->
+    <div class="evento-slide">
+      <img src="{% static 'img/WhatsApp Image 2026-05-26 at 9.16.14 PM (1).jpeg' %}" class="evento-img">
+ 
+      <div class="evento-overlay">
+        <span class="evento-badge">Guerreros CF</span>
+ 
+        <h3>
+          Una tradición que crece
+        </h3>
+ 
+        <p>
+          Guerreros CF se consolida como una de las academias más destacadas de Tlaxcala.
+        </p>
+      </div>
+    </div>
+ 
+    <!-- FOTO 34 -->
+    <div class="evento-slide">
+      <img src="{% static 'img/WhatsApp Image 2026-05-26 at 9.16.14 PM (2).jpeg' %}" class="evento-img">
+ 
+      <div class="evento-overlay">
+        <span class="evento-badge">Cancha</span>
+ 
+        <h3>
+          El campo es nuestro templo
+        </h3>
+ 
+        <p>
+          En cada rincón de la cancha, los Guerreros CF dejan su huella y su corazón.
+        </p>
+      </div>
+    </div>
+ 
+    <!-- FOTO 35 -->
+    <div class="evento-slide">
+      <img src="{% static 'img/WhatsApp Image 2026-05-26 at 9.16.14 PM (3).jpeg' %}" class="evento-img">
+ 
+      <div class="evento-overlay">
+        <span class="evento-badge">Academia</span>
+ 
+        <h3>
+          Creciendo juntos
+        </h3>
+ 
+        <p>
+          Cada temporada suma nuevos logros y jugadores que engrandecen la academia.
+        </p>
+      </div>
+    </div>
+ 
+    <!-- FOTO 36 -->
+    <div class="evento-slide">
+      <img src="{% static 'img/WhatsApp Image 2026-05-26 at 9.16.14 PM (4).jpeg' %}" class="evento-img">
+ 
+      <div class="evento-overlay">
+        <span class="evento-badge">Pasión</span>
+ 
+        <h3>
+          El verde que nos une
+        </h3>
+ 
+        <p>
+          El color de Guerreros CF representa la esperanza y el trabajo de todo un equipo.
+        </p>
+      </div>
+    </div>
+ 
+    <!-- FOTO 37 -->
+    <div class="evento-slide">
+      <img src="{% static 'img/WhatsApp Image 2026-05-26 at 9.16.14 PM (5).jpeg' %}" class="evento-img">
+ 
+      <div class="evento-overlay">
+        <span class="evento-badge">Disciplina</span>
+ 
+        <h3>
+          Constancia y mejora continua
+        </h3>
+ 
+        <p>
+          La dedicación diaria de nuestros jugadores es la base de cada éxito colectivo.
+        </p>
+      </div>
+    </div>
+ 
+    <!-- FOTO 38 -->
+    <div class="evento-slide">
+      <img src="{% static 'img/WhatsApp Image 2026-05-26 at 9.16.14 PM (6).jpeg' %}" class="evento-img">
+ 
+      <div class="evento-overlay">
+        <span class="evento-badge">Equipo</span>
+ 
+        <h3>
+          Hombro con hombro
+        </h3>
+ 
+        <p>
+          La solidaridad entre compañeros transforma esfuerzo individual en triunfo colectivo.
+        </p>
+      </div>
+    </div>
+ 
+    <!-- FOTO 39 -->
+    <div class="evento-slide">
+      <img src="{% static 'img/WhatsApp Image 2026-05-26 at 9.16.14 PM.jpeg' %}" class="evento-img">
+ 
+      <div class="evento-overlay">
+        <span class="evento-badge">Guerreros CF</span>
+ 
+        <h3>
+          Orgullo de Tlaxcala
+        </h3>
+ 
+        <p>
+          Guerreros CF lleva el nombre de Tlaxcala a cada cancha del estado con honor.
+        </p>
+      </div>
+    </div>
+ 
+    <!-- FOTO 40 -->
+    <div class="evento-slide">
+      <img src="{% static 'img/WhatsApp Image 2026-05-26 at 9.16.15 PM (1).jpeg' %}" class="evento-img">
+ 
+      <div class="evento-overlay">
+        <span class="evento-badge">Torneo</span>
+ 
+        <h3>
+          La competencia nos forja
+        </h3>
+ 
+        <p>
+          Cada torneo es una oportunidad de crecer, aprender y superar nuevos límites.
+        </p>
+      </div>
+    </div>
+ 
+    <!-- FOTO 41 -->
+    <div class="evento-slide">
+      <img src="{% static 'img/WhatsApp Image 2026-05-26 at 9.16.15 PM (2).jpeg' %}" class="evento-img">
+ 
+      <div class="evento-overlay">
+        <span class="evento-badge">Juvenil</span>
+ 
+        <h3>
+          Semillero de campeones
+        </h3>
+ 
+        <p>
+          Los jóvenes guerreros de hoy son los líderes del fútbol tlaxcalteca de mañana.
+        </p>
+      </div>
+    </div>
+ 
+    <!-- FOTO 42 -->
+    <div class="evento-slide">
+      <img src="{% static 'img/WhatsApp Image 2026-05-26 at 9.16.15 PM (3).jpeg' %}" class="evento-img">
+ 
+      <div class="evento-overlay">
+        <span class="evento-badge">Femenil</span>
+ 
+        <h3>
+          Guerreras de corazón
+        </h3>
+ 
+        <p>
+          Nuestras jugadoras demuestran que el fútbol es pasión sin fronteras de género.
+        </p>
+      </div>
+    </div>
+ 
+    <!-- FOTO 43 -->
+    <div class="evento-slide">
+      <img src="{% static 'img/WhatsApp Image 2026-05-26 at 9.16.15 PM (4).jpeg' %}" class="evento-img">
+ 
+      <div class="evento-overlay">
+        <span class="evento-badge">Entrenamiento</span>
+ 
+        <h3>
+          El esfuerzo no miente
+        </h3>
+ 
+        <p>
+          Detrás de cada jugada perfecta hay cientos de horas de entrenamiento y sacrificio.
+        </p>
+      </div>
+    </div>
+ 
+    <!-- FOTO 44 -->
+    <div class="evento-slide">
+      <img src="{% static 'img/WhatsApp Image 2026-05-26 at 9.16.15 PM (5).jpeg' %}" class="evento-img">
+ 
+      <div class="evento-overlay">
+        <span class="evento-badge">Reconocimiento</span>
+ 
+        <h3>
+          Logros que inspiran
+        </h3>
+ 
+        <p>
+          Cada trofeo y reconocimiento es el fruto del trabajo de todo el equipo Guerreros CF.
+        </p>
+      </div>
+    </div>
+ 
+    <!-- FOTO 45 -->
+    <div class="evento-slide">
+      <img src="{% static 'img/WhatsApp Image 2026-05-26 at 9.16.15 PM (6).jpeg' %}" class="evento-img">
+ 
+      <div class="evento-overlay">
+        <span class="evento-badge">Guerreros CF</span>
+ 
+        <h3>
+          Misión cumplida
+        </h3>
+ 
+        <p>
+          Con disciplina, fe y trabajo en equipo, Guerreros CF sigue escribiendo su historia.
+        </p>
+      </div>
+    </div>
+ 
+    <!-- FOTO 46 -->
+    <div class="evento-slide">
+      <img src="{% static 'img/WhatsApp Image 2026-05-26 at 9.16.15 PM.jpeg' %}" class="evento-img">
+ 
+      <div class="evento-overlay">
+        <span class="evento-badge">Cancha</span>
+ 
+        <h3>
+          Donde nacen los sueños
+        </h3>
+ 
+        <p>
+          El Deportivo San Dionicio es el hogar donde cada jugador da lo mejor de sí mismo.
+        </p>
+      </div>
+    </div>
+ 
+    <!-- BOTONES -->
+    <button class="evento-btn-slider prev"
+            onclick="prevEvento()">
+            ❮
+    </button>
+ 
+    <button class="evento-btn-slider next"
+            onclick="nextEvento()">
+            ❯
+    </button>
+ 
+  </div>
+ 
+</div>
+ 
+<!-- VIDEO -->
+<div class="section">
+ 
+  <div class="section-header">
+    <div class="section-tag">Video</div>
+    <h2 class="section-title">Pasión Guerrera</h2>
+    <div class="section-line"></div>
+  </div>
+ 
+  <div class="video-container">
+ 
+    <video
+      class="promo-video"
+      autoplay
+      muted
+      loop
+      controls
+      playsinline>
+ 
+      <source src="{% static 'videos/guerreros.mp4' %}" type="video/mp4">
+ 
+      Tu navegador no soporta videos.
+ 
+    </video>
+ 
+  </div>
+ 
+</div>
+ 
+<!-- ENTRENAMIENTOS -->
+<div class="section">
+ 
+  <div class="section-header">
+    <div class="section-tag">Actividad</div>
+    <h2 class="section-title">Entrenamientos y Partidos</h2>
+    <div class="section-line"></div>
+  </div>
+ 
+  <div class="about-grid">
+ 
+    <div class="about-img-block"
+         style="
+         background-image:url('{% static 'img/entrenamientos.jpg' %}');
+         background-size:cover;
+         background-position:center;
+         ">
+    </div>
+ 
+    <div class="about-content">
+ 
+      <h2>
+        Horarios de <span>Entrenamiento</span>
+      </h2>
+ 
+      <ul class="about-features">
+        <li><strong>Días:</strong> Lunes, Miércoles y Viernes</li>
+        <li><strong>Horario:</strong> 4:00 PM a 6:00 PM</li>
+        <li><strong>Ubicación:</strong> Deportivo San Dionicio</li>
+      </ul>
+ 
+      <h2 style="margin-top:2rem;">
+        Partidos <span>Oficiales</span>
+      </h2>
+ 
+      <ul class="about-features">
+        <li><strong>Varonil Libre:</strong> Miércoles, Jueves y Viernes</li>
+        <li><strong>Juvenil:</strong> Sábados</li>
+        <li><strong>Femenil Libre:</strong> Domingos</li>
+      </ul>
+ 
+    </div>
+ 
+  </div>
+ 
+</div>
+ 
+<!-- NOTICIAS -->
+<div class="section">
+ 
+  <div class="section-header">
+    <div class="section-tag">Noticias</div>
+    <h2 class="section-title">Noticias Recientes</h2>
+    <div class="section-line"></div>
+  </div>
+ 
+  <div class="news-grid">
+ 
+    {% for noticia in noticias %}
+ 
+      <a href="{{ noticia.get_absolute_url|default:'#' }}" class="news-card">
+ 
+        <div class="news-img"
+             style="
+             {% if noticia.imagen %}
+               background-image:url('{{ noticia.imagen.url }}');
+             {% else %}
+               background:#111;
+             {% endif %}
+             background-size:cover;
+             background-position:center;
+             ">
+ 
+          {% if not noticia.imagen %}
+            <div class="news-img-placeholder">📰</div>
+          {% endif %}
+ 
+          <span class="news-category">
+            {{ noticia.get_categoria_display }}
+          </span>
+ 
+        </div>
+ 
+        <div class="news-body">
+ 
+          <div class="news-date">
+            {{ noticia.fecha_publicacion|date:"d F Y" }}
+          </div>
+ 
+          <div class="news-title">
+            {{ noticia.titulo }}
+          </div>
+ 
+          <div class="news-excerpt">
+            {{ noticia.resumen }}
+          </div>
+ 
+          <span class="news-read-more">
+            Leer más →
+          </span>
+ 
+        </div>
+ 
+      </a>
+ 
+    {% empty %}
+ 
+      <p style="text-align:center;">
+        No hay noticias aún.
+      </p>
+ 
+    {% endfor %}
+ 
+  </div>
+ 
+</div>
+ 
+<!-- SCRIPT -->
+<script>
+ 
+let eventoIndex = 0;
+ 
+const eventoSlides =
+document.querySelectorAll(".evento-slide");
+ 
+function showEvento(index){
+ 
+  eventoSlides.forEach(slide => {
+    slide.classList.remove("active");
+  });
+ 
+  eventoSlides[index].classList.add("active");
+}
+ 
+function nextEvento(){
+ 
+  eventoIndex++;
+ 
+  if(eventoIndex >= eventoSlides.length){
+    eventoIndex = 0;
+  }
+ 
+  showEvento(eventoIndex);
+}
+ 
+function prevEvento(){
+ 
+  eventoIndex--;
+ 
+  if(eventoIndex < 0){
+    eventoIndex = eventoSlides.length - 1;
+  }
+ 
+  showEvento(eventoIndex);
+}
+ 
+/* AUTOMÁTICO */
+setInterval(nextEvento, 8000);
+ 
+</script>
+ 
+{% endblock %}

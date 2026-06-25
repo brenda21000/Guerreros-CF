@@ -1,0 +1,114 @@
+{% extends 'guerreros_cf/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="page-hero">
+  <h1>Noticias <em>Guerreros CF</em></h1>
+  <p>Toda la actualidad de la Academia Crística Guerreros CF</p>
+</div>
+
+<div class="section">
+
+  <!-- FILTROS -->
+  <div class="filtros-bar">
+    
+    <a href="{% url 'guerreros:noticias_lista' %}"
+       class="filtro-btn {% if not categoria_actual %}active{% endif %}">
+      Todas
+    </a>
+
+    {% for valor, etiqueta in categorias %}
+      {% if valor != 'resultado' and valor != 'inscripciones' %}
+        <a href="{% url 'guerreros:noticias_lista' %}?categoria={{ valor }}"
+           class="filtro-btn {% if categoria_actual == valor %}active{% endif %}">
+          {{ etiqueta }}
+        </a>
+      {% endif %}
+    {% endfor %}
+
+  </div>
+
+  <!-- GRID -->
+  <div class="news-grid" style="margin-top: 2rem">
+
+    {% for noticia in noticias %}
+    <a href="{{ noticia.get_absolute_url }}" class="news-card">
+
+      <!-- IMAGEN -->
+      <div class="news-img"
+        style="
+        {% if noticia.imagen %}
+          background-image:url('{{ noticia.imagen.url }}');
+        {% else %}
+          background-color:#111;
+        {% endif %}
+        background-size:cover;
+        background-position:center;
+        height:200px;
+        ">
+
+        <span class="news-category">
+          {{ noticia.get_categoria_display }}
+        </span>
+
+      </div>
+
+      <!-- CONTENIDO -->
+      <div class="news-body">
+
+        <div class="news-date">
+          {{ noticia.fecha_publicacion|date:"d F Y" }}
+        </div>
+
+        <div class="news-title">
+          {{ noticia.titulo }}
+        </div>
+
+        <div class="news-excerpt">
+          {{ noticia.resumen }}
+        </div>
+
+        <span class="news-read-more">
+          Leer más →
+        </span>
+
+      </div>
+
+    </a>
+    {% empty %}
+      <div class="empty-state">
+        <p>No hay noticias en esta categoría todavía.</p>
+      </div>
+    {% endfor %}
+
+  </div>
+
+  <!-- PAGINACIÓN -->
+  {% if noticias.has_other_pages %}
+  <div class="paginacion">
+
+    {% if noticias.has_previous %}
+      <a href="?page={{ noticias.previous_page_number }}{% if categoria_actual %}&categoria={{ categoria_actual }}{% endif %}"
+         class="pag-btn">
+        ← Anterior
+      </a>
+    {% endif %}
+
+    <span class="pag-info">
+      Página {{ noticias.number }} de {{ noticias.paginator.num_pages }}
+    </span>
+
+    {% if noticias.has_next %}
+      <a href="?page={{ noticias.next_page_number }}{% if categoria_actual %}&categoria={{ categoria_actual }}{% endif %}"
+         class="pag-btn">
+        Siguiente →
+      </a>
+    {% endif %}
+
+  </div>
+  {% endif %}
+
+</div>
+
+{% endblock %}

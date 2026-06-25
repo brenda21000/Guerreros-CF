@@ -1,0 +1,292 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <title>
+    {% block title %}
+      {{ titulo_pagina|default:"Inicio" }} — Guerreros CF
+    {% endblock %}
+  </title>
+
+  <meta name="description"
+        content="Academia Crística Guerreros CF — Pasión por el fútbol en Yauhquemehcan, Tlaxcala">
+
+  <!-- EXTRA -->
+  <meta name="theme-color" content="#081224">
+  <meta name="author" content="Guerreros CF">
+
+  <link rel="icon" href="{% static 'img/logo.png' %}">
+
+  <!-- FUENTES -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@700;800&display=swap"
+        rel="stylesheet"/>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="{% static 'css/main.css' %}">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+  {% block extra_css %}{% endblock %}
+
+</head>
+
+<body>
+
+<!-- =========================
+        NAVBAR
+========================= -->
+
+<nav>
+
+  <div class="nav-inner">
+
+    <!-- LOGO -->
+    <a class="nav-brand"
+       href="{% url 'guerreros:inicio' %}">
+
+      <img src="{% static 'img/logo.png' %}"
+           alt="Guerreros CF"
+           class="nav-logo-img">
+
+      <div class="nav-title">
+        Guerreros <span>CF</span>
+      </div>
+
+    </a>
+
+    <!-- BOTÓN MOBILE -->
+    <button class="nav-toggle"
+            onclick="toggleMenu()">
+
+      ☰
+
+    </button>
+
+    <!-- LINKS -->
+    <ul class="nav-links"
+        id="navLinks">
+
+      <li>
+        <a href="{% url 'guerreros:inicio' %}"
+           {% if request.resolver_match.url_name == 'inicio' %}
+           class="active"
+           {% endif %}>
+
+          Inicio
+
+        </a>
+      </li>
+
+      <li>
+        <a href="{% url 'guerreros:equipos_lista' %}"
+           {% if 'equipo' in request.resolver_match.url_name %}
+           class="active"
+           {% endif %}>
+
+          Equipos
+
+        </a>
+      </li>
+
+      <li>
+        <a href="{% url 'guerreros:noticias_lista' %}"
+           {% if 'noticia' in request.resolver_match.url_name %}
+           class="active"
+           {% endif %}>
+
+          Noticias
+
+        </a>
+      </li>
+
+      <li>
+        <a href="{% url 'guerreros:liga_info' %}"
+           {% if 'liga' in request.resolver_match.url_name or 'tabla' in request.resolver_match.url_name %}
+           class="active"
+           {% endif %}>
+
+          La Liga
+
+        </a>
+      </li>
+
+      <li>
+        <a href="{% url 'guerreros:contacto' %}"
+           {% if request.resolver_match.url_name == 'contacto' %}
+           class="active"
+           {% endif %}>
+
+          Contacto
+
+        </a>
+      </li>
+
+    </ul>
+
+  </div>
+
+</nav>
+
+<!-- =========================
+        MENSAJES
+========================= -->
+
+{% if messages %}
+
+<div class="messages-container">
+
+  {% for message in messages %}
+
+    <div class="alert alert-{{ message.tags }}">
+      {{ message }}
+    </div>
+
+  {% endfor %}
+
+</div>
+
+{% endif %}
+
+<!-- =========================
+        CONTENIDO
+========================= -->
+
+{% block content %}
+{% endblock %}
+
+<!-- =========================
+          FOOTER
+========================= -->
+
+<footer>
+
+  <div class="footer-inner">
+
+    <div class="footer-grid">
+
+      <!-- LOGO -->
+      <div class="footer-brand">
+
+        <div class="footer-logo">
+
+          <img src="{% static 'img/logo.png' %}"
+               alt="Guerreros CF">
+
+          <div class="footer-logo-text">
+
+            Academia Crística<br>
+            Guerreros CF
+
+          </div>
+
+        </div>
+
+        <p class="footer-desc">
+
+          Formando campeones con fe,
+          disciplina y trabajo en equipo
+          desde 2019.
+
+          Ubicados en EMSAD Yauhquemehcan,
+          Tlaxcala, México.
+
+        </p>
+
+      </div>
+
+      <!-- LINKS -->
+      <div class="footer-col">
+
+        <h4>Navegación</h4>
+
+        <ul>
+
+          <li>
+            <a href="{% url 'guerreros:inicio' %}">
+              Inicio
+            </a>
+          </li>
+
+          <li>
+            <a href="{% url 'guerreros:equipos_lista' %}">
+              Equipos
+            </a>
+          </li>
+
+          <li>
+            <a href="{% url 'guerreros:noticias_lista' %}">
+              Noticias
+            </a>
+          </li>
+
+          <li>
+            <a href="{% url 'guerreros:liga_info' %}">
+              La Liga
+            </a>
+          </li>
+
+          <li>
+            <a href="{% url 'guerreros:contacto' %}">
+              Contacto
+            </a>
+          </li>
+
+        </ul>
+
+      </div>
+
+    </div>
+
+    <!-- FOOTER BOTTOM -->
+    <div class="footer-bottom">
+
+      <p>
+
+        © {% now "Y" %}
+
+        <span class="footer-gold">
+          Academia Crística Guerreros CF
+        </span>
+
+        · Pasión por el fútbol 🏆
+
+      </p>
+
+      <p>
+        EMSAD Yauhquemehcan · Tlaxcala, México
+      </p>
+
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- =========================
+            JS
+========================= -->
+
+<script src="{% static 'js/main.js' %}"></script>
+
+<script>
+
+function toggleMenu(){
+
+  const nav = document.getElementById("navLinks");
+
+  nav.classList.toggle("active");
+}
+
+</script>
+
+{% block extra_js %}
+{% endblock %}
+
+</body>
+</html>

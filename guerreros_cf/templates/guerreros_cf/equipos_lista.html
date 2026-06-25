@@ -1,0 +1,485 @@
+{% extends 'guerreros_cf/base.html' %}
+{% load static %}
+
+{% block title %}Equipos — Guerreros CF{% endblock %}
+
+{% block content %}
+
+<div class="page-hero">
+  <h1>Nuestros <em>Equipos</em></h1>
+  <p>Tres divisiones · Muchos campeones</p>
+</div>
+
+<div class="section">
+
+  <!-- FEMENIL -->
+  {% if equipos_femenil %}
+  <div class="cat-divider">
+    <div class="cat-divider-line"></div>
+    <div class="cat-divider-badge">
+      <img src="{% static 'img/escudos/escudo_femenil.png' %}" alt="Escudo Femenil" class="cat-divider-escudo" />
+      Femenil Libre
+    </div>
+    <div class="cat-divider-line right"></div>
+  </div>
+
+  <div class="ad-promo ad-promo-femenil">
+    <span class="ad-promo-tag">📣 ¡Inscripciones abiertas!</span>
+    <h3 class="ad-promo-title">Liga Femenil &amp; Prepa Guerreros</h3>
+    <div class="ad-promo-grid">
+      <div class="ad-promo-item">
+        <span class="ad-promo-icon">📍</span>
+        <span>San Dionisio, Yauhquemehcan<br><small>Unidad Deportiva</small></span>
+      </div>
+      <div class="ad-promo-item">
+        <span class="ad-promo-icon">📞</span>
+        <span>WhatsApp: <strong>241-105-5982</strong><br><small>Profesor Santos</small></span>
+      </div>
+    </div>
+    <a href="https://wa.me/522411055982" target="_blank" rel="noopener" class="ad-promo-cta">¡Quiero inscribirme!</a>
+  </div>
+
+  {% if anuncios_femenil %}
+  <div class="ad-gallery-row">
+    {% for anuncio in anuncios_femenil %}
+    <div class="ad-gallery-item">
+      <span class="ad-gallery-tag">⭐ Guerreros</span>
+      <img src="{{ anuncio.imagen.url }}" alt="{{ anuncio.nombre_patrocinador }}" class="ad-gallery-img" />
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <div class="teams-grid">
+    {% for equipo in equipos_femenil %}
+    <a href="{{ equipo.get_absolute_url }}" class="team-card femenil">
+
+      <div class="team-header femenil">
+
+        {% if equipo.logo %}
+        <div class="team-cover">
+        <img
+          src="{{ equipo.logo.url }}"
+          alt="{{ equipo.nombre }}"
+          class="team-cover-img"
+        >
+        </div>
+        {% else %}
+        <svg class="team-shield-svg" viewBox="0 0 80 90">
+
+          <path
+            d="M40 2 L78 18 L78 50 Q78 75 40 88 Q2 75 2 50 L2 18 Z"
+            fill="{{ equipo.color_principal }}"
+            stroke="{{ equipo.color_secundario }}"
+            stroke-width="2.5"
+          />
+
+          <path
+            d="M40 10 L70 23 L70 50 Q70 70 40 81 Q10 70 10 50 L10 23 Z"
+            fill="#9333ea"
+            opacity="0.4"
+          />
+
+          <text
+            x="40"
+            y="45"
+            text-anchor="middle"
+            fill="white"
+            font-size="20"
+            font-weight="bold">
+            {{ equipo.nombre|slice:":2"|upper }}
+          </text>
+
+          <text
+            x="40"
+            y="60"
+            text-anchor="middle"
+            fill="{{ equipo.color_secundario }}"
+            font-size="9"
+            font-weight="bold">
+            FEMENIL
+          </text>
+
+        </svg>
+        {% endif %}
+
+        <div class="team-name">{{ equipo.nombre }}</div>
+
+        <div class="team-category femenil-tag">
+          {{ equipo.get_division_display }}
+        </div>
+
+      </div>
+
+      <div class="team-body">
+
+        {% if equipo.horario_entreno %}
+        <div class="team-stat">
+          <span class="team-stat-label">Entreno</span>
+          <span class="team-stat-val">{{ equipo.horario_entreno }}</span>
+        </div>
+        {% endif %}
+
+        {% if equipo.trofeos.all %}
+        <div class="team-stat team-trofeos">
+          <span class="team-stat-label">🏆 Trofeos</span>
+          <span class="team-stat-val">
+            {% for trofeo in equipo.trofeos.all %}
+              {{ trofeo.nombre_torneo }} ({{ trofeo.anio }}){% if not forloop.last %}, {% endif %}
+            {% endfor %}
+          </span>
+        </div>
+        {% endif %}
+
+        {% if equipo.descripcion_logros %}
+        <div class="team-stat team-logros">
+          <span class="team-stat-label">🎖️ Logros</span>
+          <span class="team-stat-val">
+            {{ equipo.descripcion_logros }}
+            {% if equipo.fecha_logro %}
+              <br><small>📅 {{ equipo.fecha_logro|date:"d/m/Y" }}</small>
+            {% elif equipo.anio_logro %}
+              <br><small>📅 {{ equipo.anio_logro }}</small>
+            {% endif %}
+          </span>
+        </div>
+        {% endif %}
+
+        <div class="team-stat">
+          <span class="team-stat-label">Estado</span>
+          <span class="team-stat-val">
+            {% if equipo.activo %}
+              🟢 Activo
+            {% else %}
+              ⚫ Inactivo
+            {% endif %}
+          </span>
+        </div>
+
+      </div>
+
+    </a>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+
+  <!-- JUVENIL -->
+  {% if equipos_juvenil %}
+  <div class="cat-divider">
+    <div class="cat-divider-line"></div>
+    <div class="cat-divider-badge">
+      <img src="{% static 'img/escudos/escudo_juvenil.png' %}" alt="Escudo Juvenil" class="cat-divider-escudo" />
+      Juvenil
+    </div>
+    <div class="cat-divider-line right"></div>
+  </div>
+
+  <div class="ad-promo ad-promo-juvenil">
+    <span class="ad-promo-tag">📣 ¡Inscripciones abiertas!</span>
+    <h3 class="ad-promo-title">Liga Juvenil Guerreros Yauhquemehcan</h3>
+    <div class="ad-promo-grid">
+      <div class="ad-promo-item">
+        <span class="ad-promo-icon">📅</span>
+        <span>Sábados<br><small>8:00 a.m. – 1:00 p.m.</small></span>
+      </div>
+      <div class="ad-promo-item">
+        <span class="ad-promo-icon">📍</span>
+        <span>San Dionisio, Yauhquemehcan<br><small>Unidad Deportiva</small></span>
+      </div>
+      <div class="ad-promo-item">
+        <span class="ad-promo-icon">📞</span>
+        <span>WhatsApp: <strong>241-105-5982</strong><br><small>Profesor Santos</small></span>
+      </div>
+    </div>
+    <a href="https://wa.me/522411055982" target="_blank" rel="noopener" class="ad-promo-cta">¡Sé parte de la familia Guerreros!</a>
+  </div>
+
+  {% if anuncios_juvenil %}
+  <div class="ad-gallery-row">
+    {% for anuncio in anuncios_juvenil %}
+    <div class="ad-gallery-item">
+      <span class="ad-gallery-tag">⭐ Guerreros</span>
+      <img src="{{ anuncio.imagen.url }}" alt="{{ anuncio.nombre_patrocinador }}" class="ad-gallery-img" />
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <div class="teams-grid">
+    {% for equipo in equipos_juvenil %}
+    <a href="{{ equipo.get_absolute_url }}" class="team-card juvenil">
+
+      <div class="team-header juvenil">
+
+        {% if equipo.logo %}
+        <img
+          src="{{ equipo.logo.url }}"
+          alt="{{ equipo.nombre }}"
+          class="team-shield-svg"
+        />
+        {% else %}
+        <svg class="team-shield-svg" viewBox="0 0 80 90">
+
+          <path
+            d="M40 2 L78 18 L78 50 Q78 75 40 88 Q2 75 2 50 L2 18 Z"
+            fill="#0d2137"
+            stroke="#4db8e8"
+            stroke-width="2.5"
+          />
+
+          <path
+            d="M40 10 L70 23 L70 50 Q70 70 40 81 Q10 70 10 50 L10 23 Z"
+            fill="#2980b9"
+            opacity="0.5"
+          />
+
+          <text
+            x="40"
+            y="45"
+            text-anchor="middle"
+            fill="white"
+            font-size="14"
+            font-weight="bold">
+            {{ equipo.get_division_display|slice:":6"|upper }}
+          </text>
+
+          <text
+            x="40"
+            y="60"
+            text-anchor="middle"
+            fill="#a8dff5"
+            font-size="9"
+            font-weight="bold">
+            GUERREROS
+          </text>
+
+        </svg>
+        {% endif %}
+
+        <div class="team-name">{{ equipo.nombre }}</div>
+
+        <div class="team-category juvenil-tag">
+          {{ equipo.get_division_display }}
+        </div>
+
+      </div>
+
+      <div class="team-body">
+
+        {% if equipo.horario_entreno %}
+        <div class="team-stat">
+          <span class="team-stat-label">Entreno</span>
+          <span class="team-stat-val">{{ equipo.horario_entreno }}</span>
+        </div>
+        {% endif %}
+
+        {% if equipo.trofeos.all %}
+        <div class="team-stat team-trofeos">
+          <span class="team-stat-label">🏆 Trofeos</span>
+          <span class="team-stat-val">
+            {% for trofeo in equipo.trofeos.all %}
+              {{ trofeo.nombre_torneo }} ({{ trofeo.anio }}){% if not forloop.last %}, {% endif %}
+            {% endfor %}
+          </span>
+        </div>
+        {% endif %}
+
+        {% if equipo.descripcion_logros %}
+        <div class="team-stat team-logros">
+          <span class="team-stat-label">🎖️ Logros</span>
+          <span class="team-stat-val">
+            {{ equipo.descripcion_logros }}
+            {% if equipo.fecha_logro %}
+              <br><small>📅 {{ equipo.fecha_logro|date:"d/m/Y" }}</small>
+            {% elif equipo.anio_logro %}
+              <br><small>📅 {{ equipo.anio_logro }}</small>
+            {% endif %}
+          </span>
+        </div>
+        {% endif %}
+
+        <div class="team-stat">
+          <span class="team-stat-label">Estado</span>
+          <span class="team-stat-val">
+            {% if equipo.activo %}
+              🟢 Activo
+            {% else %}
+              ⚫ Inactivo
+            {% endif %}
+          </span>
+        </div>
+
+      </div>
+
+    </a>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+
+  <!-- VARONIL -->
+  {% if equipos_varonil %}
+  <div class="cat-divider">
+    <div class="cat-divider-line"></div>
+    <div class="cat-divider-badge">
+      <img src="{% static 'img/escudos/escudo_varonil.png' %}" alt="Escudo Varonil" class="cat-divider-escudo" />
+      Varonil Libre
+    </div>
+    <div class="cat-divider-line right"></div>
+  </div>
+
+  <div class="ad-promo ad-promo-varonil">
+    <span class="ad-promo-tag">📣 ¡Inscribe tu equipo!</span>
+    <h3 class="ad-promo-title">Liga Varonil Libre Guerreros</h3>
+    <div class="ad-promo-grid">
+      <div class="ad-promo-item">
+        <span class="ad-promo-icon">📅</span>
+        <span>Miércoles, jueves y viernes<br><small>7:00 p.m. – 11:00 p.m.</small></span>
+      </div>
+      <div class="ad-promo-item">
+        <span class="ad-promo-icon">📍</span>
+        <span>San Dionisio, Yauhquemehcan<br><small>Unidad Deportiva</small></span>
+      </div>
+      <div class="ad-promo-item">
+        <span class="ad-promo-icon">📞</span>
+        <span>WhatsApp: <strong>241-105-5982</strong><br><small>Profesor Santos</small></span>
+      </div>
+    </div>
+    <a href="https://wa.me/522411055982" target="_blank" rel="noopener" class="ad-promo-cta">¡Te esperamos!</a>
+  </div>
+
+  {% if anuncios_varonil %}
+  <div class="ad-gallery-row">
+    {% for anuncio in anuncios_varonil %}
+    <div class="ad-gallery-item">
+      <span class="ad-gallery-tag">⭐ Guerreros</span>
+      <img src="{{ anuncio.imagen.url }}" alt="{{ anuncio.nombre_patrocinador }}" class="ad-gallery-img" />
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <div class="teams-grid">
+    {% for equipo in equipos_varonil %}
+    <a href="{{ equipo.get_absolute_url }}" class="team-card varonil">
+
+      <div class="team-header varonil">
+
+        {% if equipo.logo %}
+        <img
+          src="{{ equipo.logo.url }}"
+          alt="{{ equipo.nombre }}"
+          class="team-shield-svg"
+        />
+        {% else %}
+        <svg class="team-shield-svg" viewBox="0 0 80 90">
+
+          <path
+            d="M40 2 L78 18 L78 50 Q78 75 40 88 Q2 75 2 50 L2 18 Z"
+            fill="#0d2137"
+            stroke="#f0a500"
+            stroke-width="2.5"
+          />
+
+          <path
+            d="M40 10 L70 23 L70 50 Q70 70 40 81 Q10 70 10 50 L10 23 Z"
+            fill="#1e5f8c"
+            opacity="0.5"
+          />
+
+          <text
+            x="40"
+            y="42"
+            text-anchor="middle"
+            fill="white"
+            font-size="22"
+            font-weight="bold">
+            {{ equipo.nombre|slice:":1"|upper }}
+          </text>
+
+          <text
+            x="40"
+            y="60"
+            text-anchor="middle"
+            fill="#ffc93c"
+            font-size="9"
+            font-weight="bold">
+            VARONIL
+          </text>
+
+        </svg>
+        {% endif %}
+
+        <div class="team-name">{{ equipo.nombre }}</div>
+
+        <div class="team-category varonil-tag">
+          {{ equipo.get_division_display }}
+        </div>
+
+      </div>
+
+      <div class="team-body">
+
+        {% if equipo.horario_entreno %}
+        <div class="team-stat">
+          <span class="team-stat-label">Entreno</span>
+          <span class="team-stat-val">{{ equipo.horario_entreno }}</span>
+        </div>
+        {% endif %}
+
+        {% if equipo.trofeos.all %}
+        <div class="team-stat team-trofeos">
+          <span class="team-stat-label">🏆 Trofeos</span>
+          <span class="team-stat-val">
+            {% for trofeo in equipo.trofeos.all %}
+              {{ trofeo.nombre_torneo }} ({{ trofeo.anio }}){% if not forloop.last %}, {% endif %}
+            {% endfor %}
+          </span>
+        </div>
+        {% endif %}
+
+        {% if equipo.descripcion_logros %}
+        <div class="team-stat team-logros">
+          <span class="team-stat-label">🎖️ Logros</span>
+          <span class="team-stat-val">
+            {{ equipo.descripcion_logros }}
+            {% if equipo.fecha_logro %}
+              <br><small>📅 {{ equipo.fecha_logro|date:"d/m/Y" }}</small>
+            {% elif equipo.anio_logro %}
+              <br><small>📅 {{ equipo.anio_logro }}</small>
+            {% endif %}
+          </span>
+        </div>
+        {% endif %}
+
+        <div class="team-stat">
+          <span class="team-stat-label">Estado</span>
+          <span class="team-stat-val">
+            {% if equipo.activo %}
+              🟢 Activo
+            {% else %}
+              ⚫ Inactivo
+            {% endif %}
+          </span>
+        </div>
+
+      </div>
+
+    </a>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+
+  <!-- SI NO HAY EQUIPOS -->
+  {% if not equipos_femenil and not equipos_juvenil and not equipos_varonil %}
+  <div class="empty-state">
+    <h3>No hay equipos registrados</h3>
+    <p>Próximamente aparecerán aquí.</p>
+  </div>
+  {% endif %}
+
+</div>
+
+{% endblock %}
