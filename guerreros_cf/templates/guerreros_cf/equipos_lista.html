@@ -13,7 +13,6 @@
 <div class="section">
 
   <!-- GENERAL -->
-  {% if anuncios_todas %}
   <div class="cat-divider">
     <div class="cat-divider-line"></div>
     <div class="cat-divider-badge">
@@ -24,19 +23,25 @@
   </div>
 
   <div class="ads-grid">
-    {% for anuncio in anuncios_todas %}
     <div class="ad-card todas">
       <div class="ad-card-media">
-        <img src="{{ anuncio.imagen.url }}" alt="{{ anuncio.nombre_patrocinador }}" loading="lazy" />
+        <img src="{% static 'img/anuncios/academia_entrenamientos_mixtos.png' %}" alt="Academia Guerreros — Entrenamientos Mixtos" loading="lazy" />
       </div>
       <div class="ad-card-body">
-        <span class="ad-card-name">{{ anuncio.nombre_patrocinador }}</span>
+        <span class="ad-card-name">Academia Guerreros — Entrenamientos Mixtos</span>
         <span class="ad-card-tag todas">General</span>
       </div>
     </div>
-    {% endfor %}
+    <div class="ad-card todas">
+      <div class="ad-card-media">
+        <img src="{% static 'img/anuncios/liga_guerreros_general.jpeg' %}" alt="Liga Guerreros Yauhquemehcan (Varonil y Juvenil)" loading="lazy" />
+      </div>
+      <div class="ad-card-body">
+        <span class="ad-card-name">Liga Guerreros Yauhquemehcan (Varonil y Juvenil)</span>
+        <span class="ad-card-tag todas">General</span>
+      </div>
+    </div>
   </div>
-  {% endif %}
 
   <!-- FEMENIL -->
   <div class="cat-divider">
@@ -64,16 +69,24 @@
     <a href="https://wa.me/522411055982" target="_blank" rel="noopener" class="ad-promo-cta">¡Quiero inscribirme!</a>
   </div>
 
-  {% if anuncios_femenil %}
   <div class="ad-gallery-row">
-    {% for anuncio in anuncios_femenil %}
     <div class="ad-gallery-item">
       <span class="ad-gallery-tag">⭐ Guerreros</span>
-      <img src="{{ anuncio.imagen.url }}" alt="{{ anuncio.nombre_patrocinador }}" class="ad-gallery-img" />
+      <img src="{% static 'img/anuncios/convocatoria_guerreras_femenil.png' %}" alt="Convocatoria Guerreras — Equipo Femenil" class="ad-gallery-img" />
     </div>
-    {% endfor %}
+    <div class="ad-gallery-item">
+      <span class="ad-gallery-tag">⭐ Guerreros</span>
+      <img src="{% static 'img/anuncios/liga_femenil_yauhquemehcan.jpeg' %}" alt="Liga Guerreros Femenil Yauhquemehcan" class="ad-gallery-img" />
+    </div>
+    <div class="ad-gallery-item">
+      <span class="ad-gallery-tag">⭐ Guerreros</span>
+      <img src="{% static 'img/anuncios/equipo_pinponas_femenil.png' %}" alt="Equipo Pinponas — Femenil Libre" class="ad-gallery-img" />
+    </div>
+    <div class="ad-gallery-item">
+      <span class="ad-gallery-tag">⭐ Guerreros</span>
+      <img src="{% static 'img/anuncios/academia_campeon_femenil.png' %}" alt="Academia Guerreros — Campeón Nacional Femenil Libre" class="ad-gallery-img" />
+    </div>
   </div>
-  {% endif %}
 
   {% if equipos_femenil %}
   <div class="teams-grid">
@@ -220,16 +233,12 @@
     <a href="https://wa.me/522411055982" target="_blank" rel="noopener" class="ad-promo-cta">¡Sé parte de la familia Guerreros!</a>
   </div>
 
-  {% if anuncios_juvenil %}
   <div class="ad-gallery-row">
-    {% for anuncio in anuncios_juvenil %}
     <div class="ad-gallery-item">
       <span class="ad-gallery-tag">⭐ Guerreros</span>
-      <img src="{{ anuncio.imagen.url }}" alt="{{ anuncio.nombre_patrocinador }}" class="ad-gallery-img" />
+      <img src="{% static 'img/anuncios/academia_guerreros_familia.png' %}" alt="Academia Guerreros — Categorías Juveniles" class="ad-gallery-img" />
     </div>
-    {% endfor %}
   </div>
-  {% endif %}
 
   {% if equipos_juvenil %}
   <div class="teams-grid">
@@ -374,16 +383,16 @@
     <a href="https://wa.me/522411055982" target="_blank" rel="noopener" class="ad-promo-cta">¡Te esperamos!</a>
   </div>
 
-  {% if anuncios_varonil %}
   <div class="ad-gallery-row">
-    {% for anuncio in anuncios_varonil %}
     <div class="ad-gallery-item">
       <span class="ad-gallery-tag">⭐ Guerreros</span>
-      <img src="{{ anuncio.imagen.url }}" alt="{{ anuncio.nombre_patrocinador }}" class="ad-gallery-img" />
+      <img src="{% static 'img/anuncios/equipo_juventus_varonil.png' %}" alt="Equipo Juventus — Categoría Libre" class="ad-gallery-img" />
     </div>
-    {% endfor %}
+    <div class="ad-gallery-item">
+      <span class="ad-gallery-tag">⭐ Guerreros</span>
+      <img src="{% static 'img/anuncios/equipo_monaguillos_varonil.png' %}" alt="Equipo Monaguillos — Categoría Libre" class="ad-gallery-img" />
+    </div>
   </div>
-  {% endif %}
 
   {% if equipos_varonil %}
   <div class="teams-grid">
@@ -512,16 +521,6 @@
     <p>Contáctanos por WhatsApp y forma parte de la publicidad de Guerreros CF.</p>
     <a href="https://wa.me/522411055982" target="_blank" rel="noopener">Contactar por WhatsApp</a>
   </div>
-
-  <!-- ANUNCIO EXTRA (imagen pequeña, al final) -->
-  {% if anuncio_extra %}
-  <div class="ad-extra-block">
-    <h4>Más de Guerreros CF</h4>
-    <div class="ad-extra-card">
-      <img src="{{ anuncio_extra.imagen.url }}" alt="{{ anuncio_extra.nombre_patrocinador }}" loading="lazy" />
-    </div>
-  </div>
-  {% endif %}
 
 </div>
 
