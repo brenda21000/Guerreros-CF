@@ -5,8 +5,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # ── SEGURIDAD ──────────────────────────────────────────────────────────────
 SECRET_KEY = 'django-insecure-cambia-esta-clave-en-produccion-!!!!'
-DEBUG      = True                        # ← False en producción
-ALLOWED_HOSTS = ['*']                    # ← Definir dominios en producción
+DEBUG = False
+ALLOWED_HOSTS = [
+    "guerreros-cf.onrender.com",
+    "localhost",
+    "127.0.0.1",
+]
 
 # ── APLICACIONES ──────────────────────────────────────────────────────────
 INSTALLED_APPS = [
@@ -24,6 +28,7 @@ INSTALLED_APPS = [
 # ── MIDDLEWARE ─────────────────────────────────────────────────────────────
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -82,14 +87,15 @@ USE_I18N      = True
 USE_TZ        = True
 
 # ── ARCHIVOS ESTÁTICOS ─────────────────────────────────────────────────────
-STATIC_URL  = '/static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles'    # para collectstatic
 STATIC_URL = '/static/'
+
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 STATICFILES_DIRS = [
     BASE_DIR / "static_guerreros_cf",
 ]
 
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 # ── ARCHIVOS DE MEDIA (subidos por usuarios) ───────────────────────────────
 MEDIA_URL  = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'

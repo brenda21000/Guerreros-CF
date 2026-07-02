@@ -1,1 +1,18 @@
 static_guerreros_cf/videos/guerreros.mp4
+
+# Entorno virtual
+ev2/
+venv/
+
+# Python
+__pycache__/
+*.pyc
+
+# Base de datos
+db.sqlite3
+
+# Archivos estáticos generados por collectstatic
+staticfiles/
+
+# Media
+media/
