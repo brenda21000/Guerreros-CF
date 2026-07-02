@@ -103,13 +103,19 @@ MEDIA_ROOT = BASE_DIR / 'media'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # ── EMAIL (para notificaciones de contacto e inscripciones) ───────────────
-EMAIL_BACKEND       = 'django.core.mail.backends.console.EmailBackend'  # dev
-# En producción usar SMTP:
+
+# Backend SMTP (producción)
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+# Servidor Gmail
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+
+# Credenciales Gmail (usa contraseña de aplicación, NO tu contraseña normal)
 EMAIL_HOST_USER = 'santitosmm92@gmail.com'
 EMAIL_HOST_PASSWORD = 'tu_contraseña_de_aplicacion'
-DEFAULT_FROM_EMAIL  = 'guerrerscf@gmail.com'
-ADMIN_EMAIL         = 'guerrerscf@gmail.com'
+
+# Remitente por defecto
+DEFAULT_FROM_EMAIL = 'guerreroscf@gmail.com'
+ADMIN_EMAIL = 'guerreroscf@gmail.com'
