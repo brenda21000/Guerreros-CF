@@ -1,6 +1,16 @@
 from pathlib import Path
 import os
 
+import cloudinary
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'TU_CLOUD_NAME',
+    'API_KEY': 'TU_API_KEY',
+    'API_SECRET': 'TU_API_SECRET',
+}
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # ── SEGURIDAD ──────────────────────────────────────────────────────────────
@@ -19,9 +29,12 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+
+    'cloudinary_storage',
+    'cloudinary',
+
     'django.contrib.staticfiles',
 
-    # App principal
     'guerreros_cf',
 ]
 
