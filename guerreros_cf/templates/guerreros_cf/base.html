@@ -62,7 +62,9 @@
 
     <!-- BOTÓN MOBILE -->
     <button class="nav-toggle"
-            onclick="toggleMenu()">
+            onclick="toggleMenu()"
+            aria-expanded="false"
+            aria-label="Abrir menú">
 
       ☰
 
@@ -273,17 +275,6 @@
 ========================= -->
 
 <script src="{% static 'js/main.js' %}"></script>
-
-<script>
-
-function toggleMenu(){
-
-  const nav = document.getElementById("navLinks");
-
-  nav.classList.toggle("active");
-}
-
-</script>
 
 {% block extra_js %}
 {% endblock %}

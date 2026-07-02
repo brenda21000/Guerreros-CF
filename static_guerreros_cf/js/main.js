@@ -6,11 +6,59 @@ console.log("JS CARGADO");
 function toggleMenu() {
 
     const navLinks = document.getElementById("navLinks");
+    const toggleBtn = document.querySelector(".nav-toggle");
 
     if(navLinks){
-        navLinks.classList.toggle("open");
+        const isOpen = navLinks.classList.toggle("active");
+        if(toggleBtn){
+            toggleBtn.setAttribute("aria-expanded", isOpen ? "true" : "false");
+            toggleBtn.textContent = isOpen ? "✕" : "☰";
+        }
     }
 }
+
+// Cierra el menú móvil al tocar un link, o al tocar fuera del menú
+document.addEventListener("DOMContentLoaded", function(){
+
+    const navLinks = document.getElementById("navLinks");
+    const toggleBtn = document.querySelector(".nav-toggle");
+
+    if(!navLinks) return;
+
+    navLinks.querySelectorAll("a").forEach(function(link){
+        link.addEventListener("click", function(){
+            navLinks.classList.remove("active");
+            if(toggleBtn){
+                toggleBtn.setAttribute("aria-expanded", "false");
+                toggleBtn.textContent = "☰";
+            }
+        });
+    });
+
+    document.addEventListener("click", function(e){
+        if(!navLinks.classList.contains("active")) return;
+        const clickedInsideMenu = navLinks.contains(e.target);
+        const clickedToggle = toggleBtn && toggleBtn.contains(e.target);
+        if(!clickedInsideMenu && !clickedToggle){
+            navLinks.classList.remove("active");
+            if(toggleBtn){
+                toggleBtn.setAttribute("aria-expanded", "false");
+                toggleBtn.textContent = "☰";
+            }
+        }
+    });
+
+    document.addEventListener("keydown", function(e){
+        if(e.key === "Escape" && navLinks.classList.contains("active")){
+            navLinks.classList.remove("active");
+            if(toggleBtn){
+                toggleBtn.setAttribute("aria-expanded", "false");
+                toggleBtn.textContent = "☰";
+            }
+        }
+    });
+
+});
 
 // =========================
 // HERO SLIDER

@@ -41,16 +41,24 @@ def equipos_lista(request):
 
     anuncios_activos = Anuncio.objects.filter(activo=True)
 
-    def anuncios_de(division):
-        return [a for a in anuncios_activos if a.division in (division, 'todas')]
+    # El último anuncio (orden=99) se muestra aparte, más pequeño, al final de la página
+    anuncio_extra = anuncios_activos.filter(orden=99).first()
+    anuncios_activos = anuncios_activos.exclude(pk=anuncio_extra.pk) if anuncio_extra else anuncios_activos
+
+    anuncios_todas = [a for a in anuncios_activos if a.division == 'todas']
+    anuncios_femenil = [a for a in anuncios_activos if a.division == 'femenil']
+    anuncios_juvenil = [a for a in anuncios_activos if a.division == 'juvenil']
+    anuncios_varonil = [a for a in anuncios_activos if a.division == 'varonil']
 
     context = {
         'equipos_femenil': equipos_femenil,
         'equipos_juvenil': equipos_juvenil,
         'equipos_varonil': equipos_varonil,
-        'anuncios_femenil': anuncios_de('femenil'),
-        'anuncios_juvenil': anuncios_de('juvenil'),
-        'anuncios_varonil': anuncios_de('varonil'),
+        'anuncios_todas': anuncios_todas,
+        'anuncios_femenil': anuncios_femenil,
+        'anuncios_juvenil': anuncios_juvenil,
+        'anuncios_varonil': anuncios_varonil,
+        'anuncio_extra': anuncio_extra,
     }
 
     return render(request, 'guerreros_cf/equipos_lista.html', context)

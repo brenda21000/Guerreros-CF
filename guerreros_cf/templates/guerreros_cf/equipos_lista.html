@@ -12,12 +12,37 @@
 
 <div class="section">
 
-  <!-- FEMENIL -->
-  {% if equipos_femenil %}
+  <!-- GENERAL -->
+  {% if anuncios_todas %}
   <div class="cat-divider">
     <div class="cat-divider-line"></div>
     <div class="cat-divider-badge">
-      <img src="{% static 'img/escudos/escudo_femenil.png' %}" alt="Escudo Femenil" class="cat-divider-escudo" />
+      <img src="{% static 'img/escudos/escudo_general.jpeg' %}" alt="Escudo General" class="cat-divider-escudo" />
+      Academia General
+    </div>
+    <div class="cat-divider-line right"></div>
+  </div>
+
+  <div class="ads-grid">
+    {% for anuncio in anuncios_todas %}
+    <div class="ad-card todas">
+      <div class="ad-card-media">
+        <img src="{{ anuncio.imagen.url }}" alt="{{ anuncio.nombre_patrocinador }}" loading="lazy" />
+      </div>
+      <div class="ad-card-body">
+        <span class="ad-card-name">{{ anuncio.nombre_patrocinador }}</span>
+        <span class="ad-card-tag todas">General</span>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <!-- FEMENIL -->
+  <div class="cat-divider">
+    <div class="cat-divider-line"></div>
+    <div class="cat-divider-badge">
+      <img src="{% static 'img/escudos/escudo_femenil.png' %}" alt="Escudo Femenil" class="cat-divider-escudo cat-divider-escudo-femenil" />
       Femenil Libre
     </div>
     <div class="cat-divider-line right"></div>
@@ -25,7 +50,7 @@
 
   <div class="ad-promo ad-promo-femenil">
     <span class="ad-promo-tag">📣 ¡Inscripciones abiertas!</span>
-    <h3 class="ad-promo-title">Liga Femenil &amp; Prepa Guerreros</h3>
+    <h3 class="ad-promo-title">Liga Femenil Libre Guerreros Yuhquemehcan</h3>
     <div class="ad-promo-grid">
       <div class="ad-promo-item">
         <span class="ad-promo-icon">📍</span>
@@ -50,6 +75,7 @@
   </div>
   {% endif %}
 
+  {% if equipos_femenil %}
   <div class="teams-grid">
     {% for equipo in equipos_femenil %}
     <a href="{{ equipo.get_absolute_url }}" class="team-card femenil">
@@ -165,7 +191,6 @@
 
 
   <!-- JUVENIL -->
-  {% if equipos_juvenil %}
   <div class="cat-divider">
     <div class="cat-divider-line"></div>
     <div class="cat-divider-badge">
@@ -206,6 +231,7 @@
   </div>
   {% endif %}
 
+  {% if equipos_juvenil %}
   <div class="teams-grid">
     {% for equipo in equipos_juvenil %}
     <a href="{{ equipo.get_absolute_url }}" class="team-card juvenil">
@@ -319,7 +345,6 @@
 
 
   <!-- VARONIL -->
-  {% if equipos_varonil %}
   <div class="cat-divider">
     <div class="cat-divider-line"></div>
     <div class="cat-divider-badge">
@@ -360,6 +385,7 @@
   </div>
   {% endif %}
 
+  {% if equipos_varonil %}
   <div class="teams-grid">
     {% for equipo in equipos_varonil %}
     <a href="{{ equipo.get_absolute_url }}" class="team-card varonil">
@@ -477,6 +503,23 @@
   <div class="empty-state">
     <h3>No hay equipos registrados</h3>
     <p>Próximamente aparecerán aquí.</p>
+  </div>
+  {% endif %}
+
+  <!-- CTA CONTACTO -->
+  <div class="ad-cta-banner">
+    <h3>¿Quieres anunciarte con nosotros?</h3>
+    <p>Contáctanos por WhatsApp y forma parte de la publicidad de Guerreros CF.</p>
+    <a href="https://wa.me/522411055982" target="_blank" rel="noopener">Contactar por WhatsApp</a>
+  </div>
+
+  <!-- ANUNCIO EXTRA (imagen pequeña, al final) -->
+  {% if anuncio_extra %}
+  <div class="ad-extra-block">
+    <h4>Más de Guerreros CF</h4>
+    <div class="ad-extra-card">
+      <img src="{{ anuncio_extra.imagen.url }}" alt="{{ anuncio_extra.nombre_patrocinador }}" loading="lazy" />
+    </div>
   </div>
   {% endif %}
 

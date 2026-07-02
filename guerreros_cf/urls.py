@@ -8,7 +8,7 @@ urlpatterns = [
     # INICIO
     path('', views.inicio, name='inicio'),
 
-    # EQUIPOS
+    # EQUIPOS (se conserva la vista y los datos; ya no aparece en el menú)
     path('equipos/', views.equipos_lista, name='equipos_lista'),
     path('equipos/<int:pk>/', views.equipo_detalle, name='equipo_detalle'),
 
